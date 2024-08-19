@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hacker Icon</title>
+    <meta name="description" content="Browse posts on Your Website Name. Find interesting content and updates here.">
+    <meta name="keywords" content="posts, articles, updates, Your Website Name">
+
+    <link rel="stylesheet" href="/css/styles.css"> <!-- Correct path -->
+
+    <style>
+        /* Base styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #ffffff;
+            color: #333333;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .post-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .post {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+
+        .post:hover {
+            transform: translateY(-5px);
+        }
+
+        .post-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            padding: 20px;
+        }
+
+        .post img {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto 15px auto;
+            border-radius: 4px;
+        }
+
+        .post h2 {
+            font-size: 24px;
+            margin: 0 0 10px 0;
+        }
+
+        .post h3 {
+            font-size: 18px;
+            margin: 0 0 15px 0;
+            color: #555555;
+        }
+
+        .description {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #666666;
+        }
+
+        .read-more {
+            display: inline-block;
+            margin-top: 10px;
+            color: #007BFF;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .read-more:hover {
+            text-decoration: underline;
+        }
+
+        /* Dark mode styles */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #121212;
+                color: #ffffff;
+            }
+
+            .post {
+                background-color: #1e1e1e;
+            }
+
+            .post h2,
+            .post h3,
+            .description {
+                color: #e0e0e0;
+            }
+
+            .read-more {
+                color: #bb86fc;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Hacker Icon</h1>
+    <div class="post-container">
+        <% data.forEach(post=> { %>
+            <div class="post">
+                <!-- Make the entire post clickable -->
+                <a href="/post/<%= post._id %>" class="post-link">
+                    <h2>
+                        <%= post.title %>
+                    </h2>
+                    <h3>
+                        <%= post.subtitle %>
+                    </h3>
+
+
+                    <!-- this is full description code -->
+
+                    <!-- <div class="description">
+                        <%= post.description %>
+                    </div> -->
+
+                    <!-- this line of code read more code -->
+
+                    <div class="description">
+                        <p class="short-description"><%= post.description.substring(0, 200) %>...</p>
+                        <p class="full-description" style="display:none;"><%= post.description %></p>
+                        <a href="#" class="read-more">Read more</a>
+                    </div>
+
+
+                    <% if (post.imageUrl) { %>
+                        <img src="<%= post.imageUrl %>" alt="<%= post.title %>">
+                        <% } %>
+                </a>
+            </div>
+            <% }); %>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.read-more').forEach(function (button) {
+                button.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    // Get the parent post element
+                    const postElement = this.closest('.post');
+
+                    // Redirect to the post page
+                    const postLink = postElement.querySelector('.post-link').getAttribute('href');
+                    window.location.href = postLink;
+                });
+            });
+        });
+    </script>
+
+
+</body>
+
+</html>
