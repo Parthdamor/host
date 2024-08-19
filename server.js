@@ -11,14 +11,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-
 // for edit
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
-
-
-
 
 // Set view engine to ejs
 app.set('view engine', 'ejs');
@@ -27,14 +22,14 @@ app.set('view engine', 'ejs');
 app.use('/', indexRoutes); // Updated to use indexRoutes
 app.use('/admin', adminRoutes);
 app.use(express.static('public'));
-app.use(express.static('public'));
 
-// Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/simple_app', {
+// Replace <password> with your actual MongoDB Atlas password
+mongoose.connect('mongodb+srv://parthdamor:parthhackerdatabase@parthserver8849160175.jnyf2zz.mongodb.net/parthdamor?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useUnifiedTopology: true
-}).then(() => console.log('MongoDB connected'))
-  .catch(err => console.log('MongoDB connection error:', err));
+})
+.then(() => console.log('MongoDB connected to Atlas'))
+.catch(err => console.log('MongoDB connection error:', err));
 
 // Start the server
 const PORT = process.env.PORT || 3003;
